@@ -31,20 +31,19 @@ while True:
         count += 1
         async_responses = []
         client = httpclient.InferenceServerClient("133.35.129.4:8000")
+
+        input_folder_path = f"images/input/{count}"
+        output_folder_path = f"images/output/{count}"
+
+        if not os.path.exists(input_folder_path):
+            os.makedirs(input_folder_path)
+            
+        if not os.path.exists(output_folder_path):
+            os.makedirs(output_folder_path)
         
         for i in range(3):
-
-            input_folder_path = f"images/input/{count}"
-            output_folder_path = f"images/output/{count}"
-
-            if not os.path.exists(input_folder_path):
-                os.makedirs(input_folder_path)
-            
-            if not os.path.exists(output_folder_path):
-                os.makedirs(output_folder_path)
             
             print(f"{i+1}回目の撮影 Enterを押してください")
-            input()
             if cv2.waitKey(1) & 0xFF == 13:
                 input_name = f"images/input/{count}/{count}_{i+1}.png"
 
