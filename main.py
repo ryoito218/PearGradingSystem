@@ -8,6 +8,8 @@ import tritonclient.http as httpclient
 class PearGradingSystem():
     
     def __init__(self):
+        self.cap = cv2.VideoCapture(0)
+
         self.pear_num = 0
 
         self.width = 1920
@@ -15,12 +17,10 @@ class PearGradingSystem():
 
         self.client = httpclient.InferenceServerClient("133.35.129.4:8000")
 
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+
     def evaluate(self):
-
-        cap = cv2.VideoCapture(0)
-
-        cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
-        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
 
         self.pear_num += 1
         img_num = 0
@@ -36,7 +36,7 @@ class PearGradingSystem():
             os.makedirs(output_folder_path)
 
         while True:
-            ret, frame = cap.read()
+            ret, frame = self.cap.read()
 
             if not ret:
                 print("フレームのキャプチャに失敗しました")
@@ -148,7 +148,7 @@ class PearGradingSystem():
                 
                 break
 
-        cap.release()
+        self.cap.release()
         cv2.destroyAllWindows()
 
 
