@@ -19,13 +19,8 @@ class PearGradingSystem():
 
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
-
-    def evaluate(self):
-
-        self.pear_num += 1
-        img_num = 0
-        async_responses = []
-
+    
+    def create_folder(self):
         input_folder_path = f"images/input/{self.pear_num}"
         output_folder_path = f"images/output/{self.pear_num}"
 
@@ -35,6 +30,18 @@ class PearGradingSystem():
         if not os.path.exists(output_folder_path):
             os.makedirs(output_folder_path)
 
+    def release_cap(self):
+        self.cap.release()
+        cv2.destroyAllWindows()
+
+    def evaluate(self):
+
+        self.pear_num += 1
+        img_num = 0
+        async_responses = []
+
+        self.create_folder()
+        
         while True:
             ret, frame = self.cap.read()
 
@@ -147,11 +154,6 @@ class PearGradingSystem():
                     print('検査結果は 良 です。')
                 
                 break
-    
-    def release_cap(self):
-        self.cap.release()
-        cv2.destroyAllWindows()
-
 
 system = PearGradingSystem()
 system.evaluate()
