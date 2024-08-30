@@ -9,11 +9,19 @@ class PearGradingSystem():
     
     def __init__(self):
         self.pear_num = 0
+
+        self.width = 1920
+        self.height = 1080
+
         self.client = httpclient.InferenceServerClient("133.35.129.4:8000")
 
     def evaluate(self):
 
         cap = cv2.VideoCapture(0)
+
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+
         self.pear_num += 1
         img_num = 0
         async_responses = []
