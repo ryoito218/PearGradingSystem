@@ -147,10 +147,12 @@ class PearGradingSystem():
                     print('検査結果は 良 です。')
                 
                 break
-
+    
+    def release_cap(self):
         self.cap.release()
         cv2.destroyAllWindows()
 
 
 system = PearGradingSystem()
 system.evaluate()
+system.release_cap()
