@@ -1,2 +1,7 @@
 images/input/*
 images/output/*
+*.png
+*.pth
+__pycache__
+work_dir
+logs
