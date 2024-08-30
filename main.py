@@ -44,6 +44,8 @@ class PearGradingSystem():
                 
                 cv2.imwrite(input_name, frame)
 
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
                 inputs = [
                     httpclient.InferInput("IMAGE", frame.shape, np_to_triton_dtype(frame.dtype)),
                 ]
@@ -137,7 +139,7 @@ class PearGradingSystem():
                     print('検査結果は 良 です。')
                 
                 break
-        
+
         cap.release()
         cv2.destroyAllWindows()
 
