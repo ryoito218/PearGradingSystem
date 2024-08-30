@@ -1,5 +1,3 @@
-images/input/*
-images/output/*
 *.png
 *.pth
 __pycache__
