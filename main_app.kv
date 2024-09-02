@@ -3,31 +3,44 @@ Root_Layout:
         orientation: 'horizontal'
         size: root.size
 
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
         BoxLayout:
             orientation: 'vertical'
             size_hint: 0.7, 1
-            GridLayout:
-                rows: 2
-                cols: 1
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.9
                 Label:
                     id: label_R-1
                     text: 'R-1'
                     color: (1, 0, 0, 1)
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.1
                 Label:
-                    id: label_R-2
+                    id: label_r-2
                     text: 'R-2'
                     color: (1, 0, 0, 1)
-        
+
         BoxLayout:
             orientation: 'vertical'
             size_hint: 0.3, 1
-            GridLayout:
-                rows: 2
-                cols: 1
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.2
                 Label:
                     id: label_B-1
                     text: 'B-1'
                     color: (0, 0, 1, 1)
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.8
                 Label:
                     id: label_B-2
                     text: 'B-2'
