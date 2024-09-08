@@ -7,7 +7,12 @@ import cv2
 
 class Root_Layout(GridLayout):
     def grading_pear(self):
-        self.ids.navigation.text = "Clicked !!"
+        camera_view = self.ids.camera_view
+        if camera_view.frame is not None:
+            image_frame = camera_view.frame
+            print("Frame captured for grading:", image_frame.shape)
+
+        # self.ids.navigation.text = "Clicked !!"
 
 class CameraView(Image):
     def __init__(self, **kwargs):
