@@ -17,7 +17,7 @@ class CameraView(Image):
     def update(self, dt):
         ret, self.frame = self.capture.read()
         if ret:
-            buf = cv2.flip(self.frame, 0).tostring()
+            buf = cv2.flip(self.frame, 0).tobytes()
             texture = Texture.create(size=(self.frame.shape[1], self.frame.shape[0]), colorfmt="bgr")
             texture.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
             self.texture = texture
