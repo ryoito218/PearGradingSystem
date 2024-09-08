@@ -42,7 +42,7 @@ class Root_Layout(GridLayout):
     def _evaluate_background(self):
         
         self.pear_num += 1
-        img_num = 0
+        self.img_num = 0
         async_response = []
 
         self.create_folder()
