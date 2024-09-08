@@ -4,13 +4,35 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 import cv2
+import time
+import threading
 
 class Root_Layout(GridLayout):
-    def grading_pear(self):
-        camera_view = self.ids.camera_view
-        if camera_view.frame is not None:
-            image_frame = camera_view.frame
-            print("Frame captured for grading:", image_frame.shape)
+    def evaluate(self):
+        threading.Thread(target=self._evaluate_background).start()
+    
+    def _evaluate_background(self):
+
+        self.ids.navigation.text = "Processing..."
+        time.sleep(3)
+        self.ids.navigation.text = "Clicked !!"
+        
+        # img_num = 0
+        # async_response = []
+
+        # while True:
+        #     frame = self.ids.camera_view
+
+        #     if cv2.waitKey(1) & 0xFF == 13:
+        #         img_num += 1
+                
+        #         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                
+        #         inputs = 
+
+        # if camera_view.frame is not None:
+        #     image_frame = camera_view.frame
+        #     print("Frame captured for grading:", image_frame.shape)
 
         # self.ids.navigation.text = "Clicked !!"
 
@@ -32,7 +54,7 @@ class CameraView(Image):
         self.capture.release()
 
 class Main_app(App):
-    title = "GUI Application"
+    title = "Pear Grading System"
 
 if __name__ == "__main__":
     Main_app().run()
