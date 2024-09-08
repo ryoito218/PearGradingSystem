@@ -1,3 +1,4 @@
+import cv2
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
@@ -32,7 +33,8 @@ class CameraView(Image):
         self.capture.release()
 
 class Main_app(App):
-    title = "GUI Application"
+    def build(self):
+        return RootLayout()
 
 if __name__ == "__main__":
     Main_app().run()
