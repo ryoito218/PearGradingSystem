@@ -3,14 +3,28 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
+import os
 import cv2
-import time
 import threading
 
 class Root_Layout(GridLayout):
 
+    def __init__(self, **kwargs):
+        super(Root_Layout, self).__init__(**kwargs)
+        self.pear_num = 0
+
     def show_message(self, message):
         self.ids.navigation.text = message
+
+    def create_folder(self):
+        input_folder_path = f"images/input/{self.pear_num}"
+        output_folder_path = f"images/output/{self.pear_num}"
+
+        if not os.path.exists(input_folder_path):
+            os.makedirs(input_folder_path)
+
+        if not os.path.exists(output_folder_path):
+            os.makedirs(output_folder_path)
 
     def evaluate(self):
         threading.Thread(target=self._evaluate_background).start()
@@ -18,8 +32,10 @@ class Root_Layout(GridLayout):
     def _evaluate_background(self):
 
         self.show_message("No.1")
+        self.pear_num += 1
+        async_response = []
 
-        # async_response = []
+        self.create_folder()
 
         # while True:
         #     frame = self.ids.camera_view
