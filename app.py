@@ -8,16 +8,17 @@ import time
 import threading
 
 class Root_Layout(GridLayout):
+
+    def show_message(self, message):
+        self.ids.navigation.text = message
+
     def evaluate(self):
         threading.Thread(target=self._evaluate_background).start()
     
     def _evaluate_background(self):
 
-        self.ids.navigation.text = "Processing..."
-        time.sleep(3)
-        self.ids.navigation.text = "Clicked !!"
-        
-        # img_num = 0
+        self.show_message("No.1")
+
         # async_response = []
 
         # while True:
