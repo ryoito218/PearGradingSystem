@@ -6,7 +6,8 @@ from kivy.clock import Clock
 import cv2
 
 class Root_Layout(GridLayout):
-    pass
+    def grading_pear(self):
+        print("Click!!")
 
 class CameraView(Image):
     def __init__(self, **kwargs):
