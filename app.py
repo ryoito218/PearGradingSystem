@@ -7,7 +7,7 @@ import cv2
 
 class Root_Layout(GridLayout):
     def grading_pear(self):
-        print("Click!!")
+        self.ids.navigation.text = "Clicked !!"
 
 class CameraView(Image):
     def __init__(self, **kwargs):
