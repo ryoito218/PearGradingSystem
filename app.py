@@ -83,7 +83,23 @@ class Root_Layout(GridLayout):
                             outputs=outputs
                         )
                     )
-            
+        
+        areas = np.array([0,0,0,0,0,0]).astype(np.uint64)
+        num = 0
+
+        for i in range(len(async_response)):
+            result = async_response[i].get_result()
+            area = result.as_numpy("AREA")
+            number = result.as_numpy("NUMBER")
+            speed = result.as_numpy("SPEED")
+            output_image = result.as_numpy("OUTPUT_IMAGE")
+
+            output_name = f"images/output/{self.pear_num}/{self.pear_num}_{i+1}.png"
+            cv2.imwrite(output_name, output_image)
+
+            areas += area
+            num += number[0]
+
         self.show_message("Capture complete")
         self.is_capturing = False
     
