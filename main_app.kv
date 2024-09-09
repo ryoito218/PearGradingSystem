@@ -27,7 +27,7 @@ Root_Layout:
                 size_hint_y: 0.1
                 Button:
                     id: main_button
-                    text: "Execution"
+                    text: "実行"
                     on_press: root.evaluate()
 
         BoxLayout:
@@ -41,17 +41,17 @@ Root_Layout:
                     size_hint_y: 0.1
                     Label:
                         id: navigation_title
-                        text: 'Navigation'
+                        text: 'ナビゲーション'
                         font_size: '20sp'
-                        color: (0, 0, 1, 1)
+                        color: (0, 0, 0, 1)
                 BoxLayout:
                     orientation: 'vertical'
                     size_hint_y: 0.9
                     Label:
                         id: navigation
-                        text: 'Please execute'
+                        text: '実行ボタンを\n押してください'
                         font_size: '30sp'
-                        color: (0, 0, 1, 1)
+                        color: (0, 0, 0, 1)
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: 0.5
@@ -60,9 +60,9 @@ Root_Layout:
                     size_hint_y: 0.1
                     Label:
                         id: result_title
-                        text: 'Result'
+                        text: '結果'
                         font_size: '20sp'
-                        color: (0, 0, 1, 1)
+                        color: (0, 0, 0, 1)
                 BoxLayout:
                     orientation: 'vertical'
                     size_hint_y: 0.9

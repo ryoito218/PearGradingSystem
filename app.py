@@ -46,7 +46,7 @@ class Root_Layout(GridLayout):
 
         self.create_folder()
 
-        self.show_message("No.1\nPlease press Enter!")
+        self.show_message("1枚目の撮影\nEnterを押してください")
 
         while self.img_num < 3 and self.is_capturing:
             
@@ -153,7 +153,7 @@ class Root_Layout(GridLayout):
         self.show_result("良")
         self.change_text_color((0, 0, 0, 1))
 
-        self.show_message("Please execute")
+        self.show_message("実行ボタンを\n押してください")
         self.is_capturing = False
     
     def show_message(self, message):
@@ -193,7 +193,7 @@ class Root_Layout(GridLayout):
             self.img_num += 1
             input_name = f"images/input/{self.pear_num}/{self.img_num}.png"
             cv2.imwrite(input_name, frame)
-            self.show_message(f"No. {self.img_num + 1}\nPlease press Enter!")
+            self.show_message(f"{self.img_num + 1}枚目の撮影\nEnterを押してください")
             return frame
         return False
 
