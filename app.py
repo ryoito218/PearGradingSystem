@@ -49,93 +49,95 @@ class Root_Layout(GridLayout):
                 if self.enter_key_pressed():
                     frame = self.capture_image()
 
-                    inputs = [
-                        httpclient.InferInput("IMAGE", frame.shape, np_to_triton_dtype(frame.dtype)),
-                    ]
+                    # inputs = [
+                    #     httpclient.InferInput("IMAGE", frame.shape, np_to_triton_dtype(frame.dtype)),
+                    # ]
 
-                    inputs[0].set_data_from_numpy(frame)
+                    # inputs[0].set_data_from_numpy(frame)
 
-                    outputs = [
-                        httpclient.InferRequestedOutput("AREA"),
-                        httpclient.InferRequestedOutput("NUMBER"),
-                        httpclient.InferRequestedOutput("OUTPUT_IMAGE"),
-                        httpclient.InferRequestedOutput("SPEED"),
-                    ]
+                    # outputs = [
+                    #     httpclient.InferRequestedOutput("AREA"),
+                    #     httpclient.InferRequestedOutput("NUMBER"),
+                    #     httpclient.InferRequestedOutput("OUTPUT_IMAGE"),
+                    #     httpclient.InferRequestedOutput("SPEED"),
+                    # ]
 
-                    async_response.append(
-                        self.client.async_infer(
-                            model_name="pear_evaluator",
-                            inputs=inputs,
-                            outputs=outputs
-                        )
-                    )
+                    # async_response.append(
+                    #     self.client.async_infer(
+                    #         model_name="pear_evaluator",
+                    #         inputs=inputs,
+                    #         outputs=outputs
+                    #     )
+                    # )
         
-        areas = np.array([0,0,0,0,0,0]).astype(np.uint64)
-        num = 0
+        # areas = np.array([0,0,0,0,0,0]).astype(np.uint64)
+        # num = 0
 
-        for i in range(len(async_response)):
-            result = async_response[i].get_result()
-            area = result.as_numpy("AREA")
-            number = result.as_numpy("NUMBER")
-            speed = result.as_numpy("SPEED")
-            output_image = result.as_numpy("OUTPUT_IMAGE")
+        # for i in range(len(async_response)):
+        #     result = async_response[i].get_result()
+        #     area = result.as_numpy("AREA")
+        #     number = result.as_numpy("NUMBER")
+        #     speed = result.as_numpy("SPEED")
+        #     output_image = result.as_numpy("OUTPUT_IMAGE")
 
-            output_name = f"images/output/{self.pear_num}/{self.pear_num}_{i+1}.png"
-            cv2.imwrite(output_name, output_image)
+        #     output_name = f"images/output/{self.pear_num}/{self.pear_num}_{i+1}.png"
+        #     cv2.imwrite(output_name, output_image)
 
-            areas += area
-            num += number[0]
+        #     areas += area
+        #     num += number[0]
         
-        evaluation = [0,0,0,0,0]
+        # evaluation = [0,0,0,0,0]
 
-        # 黒斑病
-        if num <= 1:
-            pass
-        elif num <= 3 and areas[0]/areas[5] <= 1/3:
-            evaluation[0] = 1
-        else:
-            evaluation[0] = 2
+        # # 黒斑病
+        # if num <= 1:
+        #     pass
+        # elif num <= 3 and areas[0]/areas[5] <= 1/3:
+        #     evaluation[0] = 1
+        # else:
+        #     evaluation[0] = 2
         
-        # 外傷痕
-        if areas[1]/areas[5] <=1/10:
-            pass
-        elif areas[1]/areas[5] <= 1/3:
-            evaluation[1] = 1
-        else:
-            evaluation[1] = 2
+        # # 外傷痕
+        # if areas[1]/areas[5] <=1/10:
+        #     pass
+        # elif areas[1]/areas[5] <= 1/3:
+        #     evaluation[1] = 1
+        # else:
+        #     evaluation[1] = 2
         
-        # 斑点状汚損
-        if areas[2]/areas[5] <= 1/10:
-            pass
-        elif areas[2]/areas[5] <= 1/3:
-            evaluation[2] = 1
-        else:
-            evaluation[2] = 2
+        # # 斑点状汚損
+        # if areas[2]/areas[5] <= 1/10:
+        #     pass
+        # elif areas[2]/areas[5] <= 1/3:
+        #     evaluation[2] = 1
+        # else:
+        #     evaluation[2] = 2
         
-        # 面状汚損
-        if areas[3]/areas[5] <= 1/10:
-            pass
-        elif areas[3]/areas[5] <= 1/3:
-            evaluation[3] = 1
-        else:
-            evaluation[3] = 2
+        # # 面状汚損
+        # if areas[3]/areas[5] <= 1/10:
+        #     pass
+        # elif areas[3]/areas[5] <= 1/3:
+        #     evaluation[3] = 1
+        # else:
+        #     evaluation[3] = 2
         
-        # 薬班
-        if areas[4]/areas[5] <= 1/10:
-            pass
-        elif areas[4]/areas[5] <= 1/3:
-            evaluation[4] = 1
-        else:
-            evaluation[4] = 2
+        # # 薬班
+        # if areas[4]/areas[5] <= 1/10:
+        #     pass
+        # elif areas[4]/areas[5] <= 1/3:
+        #     evaluation[4] = 1
+        # else:
+        #     evaluation[4] = 2
         
-        max_value = max(evaluation)
+        # max_value = max(evaluation)
 
-        if max_value == 0:
-            self.show_result("Red")
-        elif max_value == 1:
-            self.show_result("Blue")
-        else:
-            self.show_result("Normal")
+        # if max_value == 0:
+        #     self.show_result("Red")
+        # elif max_value == 1:
+        #     self.show_result("Blue")
+        # else:
+        #     self.show_result("Normal")
+
+        self.show_result("Red")
 
         self.show_message("Please execute")
         self.is_capturing = False
