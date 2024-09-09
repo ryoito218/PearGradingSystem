@@ -131,13 +131,13 @@ class Root_Layout(GridLayout):
         max_value = max(evaluation)
 
         if max_value == 0:
-            pass
+            self.show_result("Red")
         elif max_value == 1:
-            pass
+            self.show_result("Blue")
         else:
-            pass
+            self.show_result("Normal")
 
-        self.show_message("Capture complete")
+        self.show_message("Please execute")
         self.is_capturing = False
     
     def show_message(self, message):
