@@ -4,6 +4,9 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 from kivy.core.window import Window
+from kivy.core.text import LabelBase, DEFAULT_FONT
+from kivy.resources import resource_add_path
+from kivy.utils import platform
 
 from tritonclient.utils import *
 import tritonclient.http as httpclient
@@ -12,6 +15,10 @@ import os
 import cv2
 import time
 import threading
+
+font_path = os.path.join(os.path.dirname(__file__), "font", "NotoSansJP-Regular.ttf")
+resource_add_path(os.path.dirname(font_path))
+LabelBase.register(DEFAULT_FONT, font_path)
 
 class Root_Layout(GridLayout):
 
@@ -137,7 +144,7 @@ class Root_Layout(GridLayout):
         # else:
         #     self.show_result("Normal")
 
-        self.show_result("Red")
+        self.show_result("赤秀")
 
         self.show_message("Please execute")
         self.is_capturing = False
