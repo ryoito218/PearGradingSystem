@@ -1,10 +1,13 @@
-import cv2
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 from kivy.core.window import Window
+
+from tritonclient.utils import *
+import tritonclient.http as httpclient
+
 import os
 import cv2
 import time
@@ -14,10 +17,13 @@ class Root_Layout(GridLayout):
 
     def __init__(self, **kwargs):
         super(Root_Layout, self).__init__(**kwargs)
+
         self.pear_num = 0
         self.img_num = 0
         self.is_capturing = False
         self.enter_key_pressed_flag =False
+
+        self.client = httpclient.InferenceServerClient("133.35.129.4:8000")
 
         Window.bind(on_key_down=self.on_key_down)
 
@@ -50,11 +56,33 @@ class Root_Layout(GridLayout):
         self.show_message("No.1\nPlease press Enter!")
 
         while self.img_num < 3 and self.is_capturing:
+            
             if self.ids.camera_view is not None:
                 time.sleep(0.1)
 
                 if self.enter_key_pressed():
-                    self.capture_image()
+                    frame = self.capture_image()
+
+                    inputs = [
+                        httpclient.InferInput("IMAGE", frame.shape, np_to_triton_dtype(frame.dtype)),
+                    ]
+
+                    inputs[0].set_data_from_numpy(frame)
+
+                    outputs = [
+                        httpclient.InferRequestedOutput("AREA"),
+                        httpclient.InferRequestedOutput("NUMBER"),
+                        httpclient.InferRequestedOutput("OUTPUT_IMAGE"),
+                        httpclient.InferRequestedOutput("SPEED"),
+                    ]
+
+                    async_response.append(
+                        self.client.async_infer(
+                            model_name="pear_evaluator",
+                            inputs=inputs,
+                            outputs=outputs
+                        )
+                    )
             
         self.show_message("Capture complete")
         self.is_capturing = False
