@@ -78,6 +78,8 @@ class Root_Layout(GridLayout):
             input_name = f"images/input/{self.pear_num}/{self.img_num}.png"
             cv2.imwrite(input_name, frame)
             self.show_message(f"No. {self.img_num + 1}\nPlease press Enter!")
+            return frame
+        return False
 
 class CameraView(Image):
     def __init__(self, **kwargs):
