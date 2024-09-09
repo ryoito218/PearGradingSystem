@@ -142,6 +142,9 @@ class Root_Layout(GridLayout):
     
     def show_message(self, message):
         self.ids.navigation.text = message
+    
+    def show_result(self, result):
+        self.ids.result.text = result
 
     def create_folder(self):
         input_folder_path = f"images/input/{self.pear_num}"
