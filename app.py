@@ -99,6 +99,57 @@ class Root_Layout(GridLayout):
 
             areas += area
             num += number[0]
+        
+        evaluation = [0,0,0,0,0]
+
+        # 黒斑病
+        if num <= 1:
+            pass
+        elif num <= 3 and areas[0]/areas[5] <= 1/3:
+            evaluation[0] = 1
+        else:
+            evaluation[0] = 2
+        
+        # 外傷痕
+        if areas[1]/areas[5] <=1/10:
+            pass
+        elif areas[1]/areas[5] <= 1/3:
+            evaluation[1] = 1
+        else:
+            evaluation[1] = 2
+        
+        # 斑点状汚損
+        if areas[2]/areas[5] <= 1/10:
+            pass
+        elif areas[2]/areas[5] <= 1/3:
+            evaluation[2] = 1
+        else:
+            evaluation[2] = 2
+        
+        # 面状汚損
+        if areas[3]/areas[5] <= 1/10:
+            pass
+        elif areas[3]/areas[5] <= 1/3:
+            evaluation[3] = 1
+        else:
+            evaluation[3] = 2
+        
+        # 薬班
+        if areas[4]/areas[5] <= 1/10:
+            pass
+        elif areas[4]/areas[5] <= 1/3:
+            evaluation[4] = 1
+        else:
+            evaluation[4] = 2
+        
+        max_value = max(evaluation)
+
+        if max_value == 0:
+            pass
+        elif max_value == 1:
+            pass
+        else:
+            pass
 
         self.show_message("Capture complete")
         self.is_capturing = False
