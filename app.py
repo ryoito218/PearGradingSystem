@@ -27,20 +27,6 @@ class Root_Layout(GridLayout):
 
         Window.bind(on_key_down=self.on_key_down)
 
-
-    def show_message(self, message):
-        self.ids.navigation.text = message
-
-    def create_folder(self):
-        input_folder_path = f"images/input/{self.pear_num}"
-        output_folder_path = f"images/output/{self.pear_num}"
-
-        if not os.path.exists(input_folder_path):
-            os.makedirs(input_folder_path)
-
-        if not os.path.exists(output_folder_path):
-            os.makedirs(output_folder_path)
-
     def evaluate(self):
         self.is_capturing = True
         threading.Thread(target=self._evaluate_background).start()
@@ -153,6 +139,19 @@ class Root_Layout(GridLayout):
 
         self.show_message("Capture complete")
         self.is_capturing = False
+    
+    def show_message(self, message):
+        self.ids.navigation.text = message
+
+    def create_folder(self):
+        input_folder_path = f"images/input/{self.pear_num}"
+        output_folder_path = f"images/output/{self.pear_num}"
+
+        if not os.path.exists(input_folder_path):
+            os.makedirs(input_folder_path)
+
+        if not os.path.exists(output_folder_path):
+            os.makedirs(output_folder_path)
     
     def enter_key_pressed(self):
         if self.enter_key_pressed_flag:
