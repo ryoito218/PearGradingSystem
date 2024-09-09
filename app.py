@@ -144,7 +144,14 @@ class Root_Layout(GridLayout):
         # else:
         #     self.show_result("Normal")
 
-        self.show_result("赤秀")
+        # self.show_result("赤秀")
+        # self.change_text_color((1, 0, 0, 1))
+
+        # self.show_result("青秀")
+        # self.change_text_color((0, 0, 1, 1))
+
+        self.show_result("良")
+        self.change_text_color((0, 0, 0, 1))
 
         self.show_message("Please execute")
         self.is_capturing = False
@@ -154,6 +161,9 @@ class Root_Layout(GridLayout):
     
     def show_result(self, result):
         self.ids.result.text = result
+    
+    def change_text_color(self, color):
+        self.ids.result.color = color
 
     def create_folder(self):
         input_folder_path = f"images/input/{self.pear_num}"
