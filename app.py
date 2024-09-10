@@ -205,7 +205,7 @@ class CameraView(Image):
         self.capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
         self.capture.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
         
-        Clock.schedule_interval(self.update, 1.0/30)
+        Clock.schedule_interval(self.update, 1.0/10)
         print(self.capture.get(cv2.CAP_PROP_FRAME_WIDTH), self.capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
     
     def update(self, dt):
