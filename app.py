@@ -44,6 +44,8 @@ class Root_Layout(GridLayout):
         self.img_num = 0
         async_response = []
 
+        self.client = httpclient.InferenceServerClient("133.35.129.4:8000")
+
         self.create_folder()
 
         self.show_message("1枚目の撮影\nEnterを押してください")
