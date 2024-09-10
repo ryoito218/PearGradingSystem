@@ -216,6 +216,7 @@ class CameraView(Image):
         ret, self.frame = self.capture.read()
         if ret:
             self.frame = cv2.flip(self.frame, -1)
+            self.frame = self.frame[:, 500:-500] # 画像のトリミング
             buf = self.frame.tobytes()
             texture = Texture.create(size=(self.frame.shape[1], self.frame.shape[0]), colorfmt="bgr")
             texture.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
