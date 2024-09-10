@@ -202,7 +202,15 @@ class CameraView(Image):
     def __init__(self, **kwargs):
         super(CameraView, self).__init__(**kwargs)
         self.capture = cv2.VideoCapture(0)
+        
+        self.width = 2000
+        self.height = 2000
+
+        self.capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+        self.capture.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+        
         Clock.schedule_interval(self.update, 1.0/30)
+        print(self.capture.get(cv2.CAP_PROP_FRAME_WIDTH), self.capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
     
     def update(self, dt):
         ret, self.frame = self.capture.read()
