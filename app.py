@@ -56,6 +56,8 @@ class Root_Layout(GridLayout):
                 if self.enter_key_pressed():
                     frame = self.capture_image()
 
+                    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
                     inputs = [
                         httpclient.InferInput("IMAGE", frame.shape, np_to_triton_dtype(frame.dtype)),
                     ]
