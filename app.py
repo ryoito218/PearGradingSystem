@@ -188,6 +188,7 @@ class Root_Layout(GridLayout):
     def capture_image(self):
         camera_view = self.ids.camera_view
         frame = camera_view.frame
+        frame = cv2.flip(frame, -1)
 
         if frame is not None:
             self.img_num += 1
@@ -206,7 +207,8 @@ class CameraView(Image):
     def update(self, dt):
         ret, self.frame = self.capture.read()
         if ret:
-            buf = cv2.flip(self.frame, 0).tobytes()
+            self.frame = cv2.flip(self.frame, -1)
+            buf = self.frame.tobytes()
             texture = Texture.create(size=(self.frame.shape[1], self.frame.shape[0]), colorfmt="bgr")
             texture.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
             self.texture = texture
