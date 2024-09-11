@@ -60,6 +60,8 @@ class Root_Layout(GridLayout):
 
                     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
+                    frame = cv2.resize(frame, dsize=None, fx=np.sqrt(20/100), fy=np.sqrt(20/100), interpolation=cv2.INTER_LINEAR)
+
                     inputs = [
                         httpclient.InferInput("IMAGE", frame.shape, np_to_triton_dtype(frame.dtype)),
                     ]
